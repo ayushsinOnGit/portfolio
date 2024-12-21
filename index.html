@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ayush's Tech Portfolio</title>
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400&family=Exo+2:wght@300;400;600&display=swap"
+    rel="stylesheet"
+  />
+  <!-- Boxicons for Icons -->
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Josefin+Slab:ital,wght@0,100..700;1,100..700&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* Reset Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      cursor: none;
+    }
+
+    body {
+      font-family: "Exo 2", sans-serif;
+      background-color: #000000; /* Pure black background */
+      background-image: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.2) 1px,
+        transparent 1px
+      );
+      background-size: 20px 20px; /* Adjust size for grid spacing */
+      color: #ffffff;
+      /* Removed overflow: hidden so horizontal scroll in carousel works on desktop */
+      padding-top: 60px; /* Increased to match header height */
+      transition: overflow 0.3s ease;
+      min-height: 100vh;
+      width: 100%;
+    }
+
+    /* ============================= */
+    /*   Projects Carousel Styles    */
+    /* ============================= */
+    .projects-carousel-container {
+      position: relative;
+      width: 100%;
+      overflow-x: scroll; /* Enable horizontal scrolling */
+      white-space: nowrap; /* Keep cards side by side */
+      scroll-snap-type: x mandatory; 
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, 0.5) transparent;
+    }
+
+    .project-card p {
+  /* Ensures text wraps normally within the card */
+  white-space: normal;
+  word-wrap: break-word; /* older support */
+  overflow-wrap: break-word; /* modern approach */
+}
+
+.project-card h3 {
+  margin-bottom: 10px;
+}
+    .projects-carousel-container::-webkit-scrollbar {
+      height: 8px;
+    }
+    .projects-carousel-container::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .projects-carousel-container::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 4px;
+    }
+
+    .projects-carousel {
+      display: inline-flex;
+      gap: 20px;
+      scroll-snap-align: center;
+      padding: 10px 0;
+    }
+
+    /* Individual Project Cards in carousel */
+    .project-card {
+      background-color: rgba(255, 255, 255, 0.05);
+      color: #ffffff;
+      padding: 20px;
+      border: 1px solid #ffffff;
+      border-radius: 8px;
+      width: 300px; /* Fixed width for consistent sizing */
+      display: inline-block;
+      vertical-align: top;
+      scroll-snap-align: start;
+      transition: transform 0.3s, box-shadow 0.3s;
+      text-align: left;
+    }
+    .project-card:hover {
+      transform: scale(1.02); /* Slight zoom on hover */
+      box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
+    }
+    .project-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+    /* Tools row */
+    .project-tools {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .project-tools i {
+      font-size: 1.5rem;
+      color: #ffffff;
+      transition: color 0.3s;
+    }
+    .project-tools i:hover {
+      color: #cccccc;
+    }
+    /* Read More Link */
+    .project-card .read-more {
+      text-decoration: none;
+      color: #ffffff;
+      border: 1px solid #ffffff;
+      padding: 5px 10px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-top: 10px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .project-card .read-more:hover {
+      background-color: #ffffff;
+      color: #000000;
+      transition: sclae 1s ease-in-out;
+    }
+
+    /* Carousel Nav Buttons */
+    .carousel-nav-buttons {
+      position: absolute;
+      bottom: 20px;
+      right: 50px;
+      display: flex;
+      gap: 10px;
+      z-index: 10; /* appear above the cards */
+    }
+    .carousel-nav-buttons button {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid #fff;
+      color: #fff;
+      font-size: 1.2rem;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s;
+    }
+    .carousel-nav-buttons button:hover {
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+    *{
+        cursor: none;
+    }
+      .project-card {
+        width: 250px; /* slightly smaller for mobile */
+      }
+    }
+
+    /* Polaroid Photo Styles */
+    .polaroid {
+      background-color: #fff;
+      padding: 10px 10px 25px 10px; /* Extra padding at the bottom for caption */
+      border: 5px solid #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      max-width: 300px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .polaroid img {
+      width: 100%;
+      height: auto;
+      display: block;
+      margin-bottom: 10px;
+      border-radius: 4px;
+    }
+    .polaroid .caption {
+      font-size: 1rem;
+      color: #333;
+      font-family: "Source Code Pro", monospace;
+    }
+    .polaroid:hover {
+      transform: scale(1.05) rotate(-2deg);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Preloader Styles */
+    #preloader {
+      position: fixed;
+      font-family: "Cardo", monospace;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.95); /* Slightly transparent */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 1000;
+      transition: opacity 1s ease, visibility 1s;
+    }
+    #preloader.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .preloader-content {
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      padding: 10px;
+    }
+    #preloader-text {
+      font-size: 2rem;
+      margin-left: 1rem;
+      animation: swipeUp 0.5s forwards;
+      display: flex;
+      align-items: center;
+      color: #ffffff;
+    }
+    .dot {
+      width: 30px;
+      height: 30px;
+      background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+      z-index: 1;
+      position: relative;
+    }
+    .dot::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 10px;
+      height: 10px;
+      background-color: rgba(255, 255, 255, 0.8); /* More opaque for visibility */
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    /* Main Content Styles with Scroll Snap */
+    #main-content {
+      height: 100vh;
+      scroll-snap-type: y mandatory;
+      overflow-x: scroll;
+      overflow-y: scroll;
+      /* Hide scrollbar for aesthetic purposes */
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE 10+ */
+    }
+    #main-content::-webkit-scrollbar {
+      /* WebKit */
+      width: 0;
+      height: 0;
+    }
+
+    .section {
+      scroll-snap-align: start;
+      min-height: 100vh;
+      width: 100%;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: transparent; /* Removed semi-transparent background */
+      transition: transform 0.1s, opacity 0.1s;
+      opacity: 0;
+      transform: translateY(20px);
+      overflow: scroll; /* Prevents content from causing overflow */
+    }
+    .section.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    h1,
+    h2 {
+      font-family: "Source Code Pro", monospace;
+      color: #ffffff;
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    .section-content {
+      display: flex;
+      flex-direction: row;
+      max-width: 1200px;
+      width: 100%;
+      gap: 40px;
+      align-items: flex-start;
+      animation: fadeIn 1s ease forwards;
+    }
+    .section-content .left-column {
+      flex: 1;
+    }
+    .section-content .right-column {
+      flex: 2;
+    }
+    .section-content p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #cccccc;
+    }
+
+    .social-icons-bottom {
+      margin-top: 20px;
+      display: flex;
+      gap: 20px;
+    }
+    .social-icons-bottom a {
+      color: #ffffff;
+      font-size: 1.5rem;
+      transition: color 0.3s, transform 0.3s;
+    }
+    .social-icons-bottom a:hover {
+      color: #cccccc;
+      transform: scale(1.2);
+    }
+    .social-icons {
+      margin-top: 20px;
+      display: flex;
+      gap: 20px;
+    }
+    .social-icons a {
+      color: #ffffff;
+      font-size: 1.5rem;
+      transition: color 0.3s, transform 0.3s;
+    }
+    .social-icons a:hover {
+      color: #cccccc;
+      transform: scale(1.2);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes swipeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+      }
+      70% {
+        transform: scale(1.1);
+        box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+      }
+      100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .preloader-content {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: nowrap;
+      }
+      #preloader-text {
+        margin-left: 0.5rem;
+        font-size: 1.5rem;
+      }
+      .dot {
+        width: 25px;
+        height: 25px;
+      }
+      .dot::after {
+        width: 8px;
+        height: 8px;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+      h2 {
+        font-size: 1.8rem;
+      }
+      .section-content {
+        flex-direction: column;
+        align-items: center;
+      }
+      .section-content .left-column,
+      .section-content .right-column {
+        width: 100%;
+      }
+    }
+
+    .mouse-scroll {
+      position: absolute;
+      bottom: 5%;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      z-index: 999;
+    }
+    .mouse {
+      width: 35px;
+      height: 55px;
+      border: 1px solid #ffffff;
+      border-radius: 25px;
+      position: relative;
+      box-sizing: border-box;
+      background-color: transparent;
+    }
+    .wheel {
+      width: 6px;
+      height: 6px;
+      border: 1px solid #ffffff;
+      background-color: #ffffff;
+      border-radius: 50%;
+      position: absolute;
+      top: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: scroll 2s infinite;
+    }
+    @keyframes scroll {
+      0% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+      50% {
+        opacity: 0.5;
+        transform: translateX(-50%) translateY(10px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+    .mouse-scroll:hover .wheel {
+      animation-play-state: paused;
+    }
+
+    .cursor {
+      position: fixed;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background-color: #ffffff;
+      border: #ffffff 1px solid;
+      transform: translate(-50%, -50%);
+      transition: background-color 0.1s ease, border 0.1s ease, height 0.1s ease,
+        width 0.1s ease;
+      pointer-events: none;
+      z-index: 10001;
+    }
+    .cursor.white {
+      background-color: rgba(255, 255, 255, 0.9);
+      width: 40px;
+      height: 40px;
+      border: #000000 1px solid;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 15px 30px; /* Increased padding for better spacing */
+      z-index: 1000;
+      background-color: rgba(0, 0, 0, 0.95);
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      background-color: rgba(0, 0, 0, 0.95);
+    }
+    .navbar-left .brand {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      font-family: "Source Code Pro", monospace;
+      color: #ffffff;
+      font-size: 1.2rem;
+      font-weight: 300;
+      transition: color 0.3s;
+    }
+    .navbar-left .brand:hover {
+      color: #cccccc;
+    }
+    .navbar-right .nav-menu {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      transition: all 0.3s ease-in-out;
+      font-family: "Exo 2", sans-serif;
+      font-weight: 400;
+    }
+    .navbar-right .nav-menu li a {
+      text-decoration: none;
+      color: #ffffff;
+      font-size: 1rem;
+      transition: color 0.3s ease, background-color 0.3s ease;
+      padding: 8px 12px; /* Added padding for clickable area */
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      position: relative;
+      overflow: hidden;
+    }
+    .navbar-right .nav-menu li a::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 0%;
+      top: 0;
+      left: 0;
+      background-color: rgba(255, 255, 255, 0.2);
+      z-index: -1;
+      transition: height 0.3s ease;
+    }
+    .navbar-right .nav-menu li a:hover::before {
+      height: 100%;
+    }
+    .navbar-right .nav-menu li a:hover {
+      color: #ffffff;
+    }
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      color: #ffffff;
+      font-size: 1.8rem;
+      cursor: pointer;
+      z-index: 1001; /* Ensure it's above the menu */
+      transition: transform 0.3s ease-in-out;
+    }
+    .hamburger.active .bx-menu {
+      display: none;
+    }
+    .hamburger.active .bx-x {
+      display: block;
+      color: #ffffff;
+    }
+    .hamburger .bx-x {
+      display: none;
+      color: #ffffff;
+    }
+
+    @media (max-width: 768px) {
+      .hamburger {
+        display: block;
+      }
+      .navbar-right {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.95);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+      }
+      .navbar-right.active {
+        transform: translateX(0);
+      }
+      .navbar-right .nav-menu {
+        flex-direction: column;
+        gap: 30px;
+        font-size: 1.2rem;
+      }
+      .navbar-right .nav-menu li a {
+        color: #ffffff;
+        padding: 15px 30px;
+      }
+      .navbar-right .nav-menu li a:hover {
+        background-color: #333333; /* Slight background on hover */
+      }
+    }
+
+    /* Blog Cards Container (used in the Blog section) */
+    .blog-cards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      width: 100%;
+      max-width: 1200px;
+      margin-top: 30px;
+      justify-items: center;
+      animation: fadeIn 1s ease forwards;
+    }
+    .blog-card {
+      background-color: rgba(255, 255, 255, 0.05);
+      color: #ffffff;
+      padding: 20px;
+      border: 1px solid #ffffff;
+      border-radius: 8px;
+      position: relative;
+      width: 100%;
+      max-width: 350px;
+      transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s forwards;
+      overflow: hidden; /* Prevents content from causing overflow */
+    }
+    .blog-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .blog-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .blog-card p {
+      font-size: 1rem;
+      margin-bottom: 15px;
+      line-height: 1.4;
+    }
+    .blog-card a.read-more {
+      text-decoration: none;
+      color: #ffffff;
+      border: 1px solid #ffffff;
+      padding: 5px 10px;
+      border-radius: 4px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .blog-card a.read-more:hover {
+      background-color: #ffffff;
+      color: #000000;
+    }
+
+    /* ============================= */
+    /*   Timeline Section Redesign   */
+    /* ============================= */
+    .timeline-container {
+      position: relative;
+      max-width: 800px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 20px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      animation: fadeIn 1s ease forwards;
+    }
+    .timeline-event {
+      background-color: rgba(255, 255, 255, 0.05);
+      color: #ffffff;
+      padding: 20px;
+      border-left: 4px solid #ffffff;
+      border-radius: 4px;
+      position: relative;
+      transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s forwards;
+      overflow: hidden; /* Prevents content from causing overflow */
+    }
+    .timeline-event:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Contact Page Social Media Icons */
+    .contact-social-icons {
+      margin-top: 20px;
+      display: flex;
+      gap: 20px;
+    }
+    .contact-social-icons a {
+      color: #ffffff;
+      font-size: 2rem;
+      transition: color 0.3s, transform 0.3s;
+      position: relative;
+    }
+    .contact-social-icons a::after {
+      content: attr(aria-label);
+      position: absolute;
+      bottom: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(0, 0, 0, 0.8);
+      color: #ffffff;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+    .contact-social-icons a:hover::after {
+      opacity: 1;
+    }
+    .contact-social-icons a:hover {
+      color: #cccccc;
+      transform: scale(1.2);
+    }
+  </style>
+</head>
+<body>
+  <div id="cursor" class="cursor"></div>
+
+  <!-- Header / Top Navigation Bar -->
+  <header>
+    <div class="navbar">
+      <div class="navbar-left">
+        <a href="#" class="brand">
+          <span class="site-name">&copy; createwithayush</span>
+        </a>
+      </div>
+      <div class="navbar-right">
+        <nav>
+          <ul class="nav-menu">
+            <li><a href="#home"><i class="bx bx-home"></i> Home</a></li>
+            <li><a href="#about"><i class="bx bx-user"></i> About</a></li>
+            <li><a href="#timeline"><i class="bx bx-flag"></i> Timeline</a></li>
+            <li><a href="#projects"><i class="bx bx-layout"></i> Projects</a></li>
+            <li><a href="#blog"><i class="bx bx-book"></i> Blog</a></li>
+            <li><a href="#connect"><i class="bx bx-envelope"></i> Connect</a></li>
+            <li>
+              <a href="#connect"
+                ><strong><i class="bx bx-download"></i> Download CV</strong></a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <!-- Hamburger Button -->
+      <button
+        class="hamburger"
+        aria-label="Toggle Navigation Menu"
+        aria-expanded="false"
+      >
+        <i class="bx bx-menu"></i>
+        <i class="bx bx-x"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="preloader-content">
+      <span class="dot" aria-label="Loading Indicator"></span>
+      <p id="preloader-text">Hello, this is Ayush</p>
+    </div>
+  </div>
+
+  <!-- Main Content with Multiple Sections -->
+  <div id="main-content">
+    <!-- Home Section -->
+    <section id="home" class="section">
+      <div class="section-content">
+        <div class="left-column">
+          <div class="polaroid">
+            <img src="my.jpeg" alt="Ayush's Photo" />
+            <div class="caption">CreateWithAyush</div>
+          </div>
+          <!-- Social Media Icons Below Polaroid -->
+          <div class="social-icons-bottom">
+            <a
+              href="https://linkedin.com/in/yourprofile"
+              target="_blank"
+              aria-label="LinkedIn Profile"
+              ><i class="bx bxl-linkedin"></i
+            ></a>
+            <a
+              href="https://github.com/yourprofile"
+              target="_blank"
+              aria-label="GitHub Profile"
+              ><i class="bx bxl-github"></i
+            ></a>
+            <a
+              href="https://instagram.com/yourprofile"
+              target="_blank"
+              aria-label="Instagram Profile"
+              ><i class="bx bxl-instagram"></i
+            ></a>
+            <a
+              href="https://facebook.com/yourprofile"
+              target="_blank"
+              aria-label="Facebook Profile"
+              ><i class="bx bxl-facebook"></i
+            ></a>
+            <a
+              href="https://twitter.com/yourprofile"
+              target="_blank"
+              aria-label="twitter Profile"
+              ><i class="bx bxl-twitter"></i
+            ></a>
+            <a
+              href="https://behance.com/yourprofile"
+              target="_blank"
+              aria-label="behance Profile"
+              ><i class="bx bxl-behance"></i
+            ></a>
+            <a
+              href="https://dribbble.com/yourprofile"
+              target="_blank"
+              aria-label="dribbble Profile"
+              ><i class="bx bxl-dribbble"></i
+            ></a>
+          </div>
+        </div>
+        <div class="right-column">
+            <p>
+                Greetings, world! I’m Ayush—professional code wrangler, gym enthusiast, and accidental gadget disassembler since the age of five. Forget dusty stereotypes: this Compiler Engineer at AMD stays busy fine-tuning GPUs, cracking cryptic puzzles, and occasionally bench-pressing more than just lines of code. 
+                <br><br>
+                </p>
+                
+                <p>
+                I cut my teeth on toy robots, spent my days tinkering with compilers at Jadavpur University, and now I make GPU magic for a living. When I'm not making code dance, I'm usually off snapping pics on my travels or jotting down musings on my blog—where GPU wizards, weightlifters, and curious souls alike are always welcome. 
+                <br><br>
+                </p>
+                
+                <p>
+                So dive in, explore my eclectic corner of tech meets adventure, and get ready for a few chuckles along the way. After all, life’s too short not to have fun while spinning up blazing-fast code!
+                <br><br>
+                </p>
+            </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+      <div class="section-content">
+        <div class="left-column">
+          <h2>Whoami?</h2>
+          <img src="./image.png" width="80%" opacity="0.5">
+        </div>
+        <div class="right-column">
+            <p>
+                Ever since I could pick up a screwdriver, I’ve been dissecting everything from toy robots to my parents’ patience. While they endured a living room covered in springs and circuits, I discovered a passion for compilers, GPUs, and all things code. 
+                <br><br>
+                </p>
+                
+                <p>
+                That curiosity soared at Jadavpur University, where I dove into the fascinating worlds of formal verification, computer architecture, and puzzle-like software optimization. Fast-forward to now, and I'm a Compiler Engineer at AMD, making GPUs sing while helping code pirouette at lightning speed. 
+                <br><br>
+                </p>
+                
+                <p>
+                When I’m not flexing my brain cells, you’ll find me lifting weights, snapping travel shots, and scribbling quirky insights on my blog—stay tuned for my travel blog too! Swing by, say hi, and let’s build something awesome together.
+                <br><br>
+                </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline Section Redesign with Minimalist Boxicons -->
+<section id="timeline" class="section">
+    <div class="section-content">
+      <div class="left-column">
+        <h2>My Journey</h2>
+      </div>
+      <div class="right-column">
+        <div class="timeline-container">
+  
+          <div class="timeline-event">
+            <h3>
+              2015 - First Hello World 
+              <i class="bx bx-code-alt" style="margin-left:8px;"></i>
+            </h3>
+            <p style="text-wrap: wrap;">
+              Typed "Hello, World!" for the first time and realized I could
+              control a computer. The journey of a thousand lines of code begins!
+            </p>
+          </div>
+  
+          <div class="timeline-event">
+            <h3>
+              2017 - Bachelor’s Degree 
+              <i class="bx bx-graduation" style="margin-left:8px;"></i>
+            </h3>
+            <p style="text-wrap: wrap;">
+              Graduated with a degree in Computer Engineering. Learned that coffee
+              is a necessary part of programming.
+            </p>
+          </div>
+  
+          <div class="timeline-event">
+            <h3>
+              2018 - Internship at XYZ Tech
+              <i class="bx bx-briefcase" style="margin-left:8px;"></i>
+            </h3>
+            <p style="text-wrap: wrap;">
+              Interned at XYZ Tech where I optimized code so well that the
+              computer thanked me... or so I liked to think.
+            </p>
+          </div>
+  
+          <div class="timeline-event">
+            <h3>
+              2020 - Joined AMD 
+              <i class="bx bx-rocket" style="margin-left:8px;"></i>
+            </h3>
+            <p style="text-wrap: wrap;">
+              Became a Compiler Developer at AMD. Now I make GPUs faster while
+              dreaming of parallel universes.
+            </p>
+          </div>
+  
+          <div class="timeline-event">
+            <h3>
+              2023 - Published Research 
+              <i class="bx bx-book-content" style="margin-left:8px;"></i>
+            </h3>
+            <p style="text-wrap: wrap;">
+              Published a paper on compiler optimization. Finally felt like a
+              real academic... until I got back to debugging.
+            </p>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- Projects Section with Carousel -->
+    <section id="projects" class="section">
+      <div class="section-content">
+        <h2>Projects</h2>
+
+        <!-- Wrap your existing "cards" in the carousel container -->
+        <div class="projects-carousel-container">
+          <div class="projects-carousel">
+
+            <!-- (Keeping your existing markup for each project card) -->
+            <div class="project-card">
+              <h3><i class="bx bx-terminal"></i> Compiler Optimizer</h3>
+              <img
+                src="https://via.placeholder.com/300x200/444/fff?text=Compiler+Optimizer"
+                alt="Compiler Optimizer"
+              />
+              <p>
+                A tool that makes your code run faster than a caffeinated
+                squirrel on a wheel. Because who doesn't love speed?
+              </p>
+              <div class="project-tools">
+                <i class="bx bx-code" title="C++"></i>
+                <i class="bx bx-python" title="Python"></i>
+                <i class="bx bx-terminal" title="Bash"></i>
+              </div>
+              <a href="#" class="read-more" target="_blank">Read More</a>
+            </div>
+
+            <div class="project-card">
+              <h3><i class="bx bx-terminal"></i> Compiler Optimizer</h3>
+              <img
+                src="https://via.placeholder.com/300x200/444/fff?text=Compiler+Optimizer"
+                alt="Compiler Optimizer"
+              />
+              <p>
+                A tool that makes your code run faster than a caffeinated
+                squirrel on a wheel. Because who doesn't love speed?
+              </p>
+              <div class="project-tools">
+                <i class="bx bx-code" title="C++"></i>
+                <i class="bx bx-python" title="Python"></i>
+                <i class="bx bx-terminal" title="Bash"></i>
+              </div>
+              <a href="#" class="read-more" target="_blank">Read More</a>
+            </div>
+
+            <div class="project-card">
+              <h3><i class="bx bx-terminal"></i> Compiler Optimizer</h3>
+              <img
+                src="https://via.placeholder.com/300x200/444/fff?text=Compiler+Optimizer"
+                alt="Compiler Optimizer"
+              />
+              <p>
+                A tool that makes your code run faster than a caffeinated
+                squirrel on a wheel. Because who doesn't love speed?
+              </p>
+              <div class="project-tools">
+                <i class="bx bx-code" title="C++"></i>
+                <i class="bx bx-python" title="Python"></i>
+                <i class="bx bx-terminal" title="Bash"></i>
+              </div>
+              <a href="#" class="read-more" target="_blank">Read More</a>
+            </div>
+
+            <div class="project-card">
+              <h3><i class="bx bx-terminal"></i> Compiler Optimizer</h3>
+              <img
+                src="https://via.placeholder.com/300x200/444/fff?text=Compiler+Optimizer"
+                alt="Compiler Optimizer"
+              />
+              <p>
+                A tool that makes your code run faster than a caffeinated
+                squirrel on a wheel. Because who doesn't love speed?
+              </p>
+              <div class="project-tools">
+                <i class="bx bx-code" title="C++"></i>
+                <i class="bx bx-python" title="Python"></i>
+                <i class="bx bx-terminal" title="Bash"></i>
+              </div>
+              <a href="#" class="read-more" target="_blank">Read More</a>
+            </div>
+
+            <div class="project-card">
+              <h3><i class="bx bx-terminal"></i> Compiler Optimizer</h3>
+              <img
+                src="https://via.placeholder.com/300x200/444/fff?text=Compiler+Optimizer"
+                alt="Compiler Optimizer"
+              />
+              <p>
+                A tool that makes your code run faster than a caffeinated
+                squirrel on a wheel. Because who doesn't love speed?
+              </p>
+              <div class="project-tools">
+                <i class="bx bx-code" title="C++"></i>
+                <i class="bx bx-python" title="Python"></i>
+                <i class="bx bx-terminal" title="Bash"></i>
+              </div>
+              <a href="#" class="read-more" target="_blank">Read More</a>
+            </div>
+
+            <div class="project-card">
+              <h3><i class="bx bx-terminal"></i> Compiler Optimizer</h3>
+              <img
+                src="https://via.placeholder.com/300x200/444/fff?text=Compiler+Optimizer"
+                alt="Compiler Optimizer"
+              />
+              <p>
+                A tool that makes your code run faster than a caffeinated
+                squirrel on a wheel. Because who doesn't love speed?
+              </p>
+              <div class="project-tools">
+                <i class="bx bx-code" title="C++"></i>
+                <i class="bx bx-python" title="Python"></i>
+                <i class="bx bx-terminal" title="Bash"></i>
+              </div>
+              <a href="#" class="read-more" target="_blank">Read More</a>
+            </div>
+
+            <div class="project-card">
+              <h3><i class="bx bx-terminal"></i> Compiler Optimizer</h3>
+              <img
+                src="https://via.placeholder.com/300x200/444/fff?text=Compiler+Optimizer"
+                alt="Compiler Optimizer"
+              />
+              <p>
+                A tool that makes your code run faster than a caffeinated
+                squirrel on a wheel. Because who doesn't love speed?
+              </p>
+              <div class="project-tools">
+                <i class="bx bx-code" title="C++"></i>
+                <i class="bx bx-python" title="Python"></i>
+                <i class="bx bx-terminal" title="Bash"></i>
+              </div>
+              <a href="#" class="read-more" target="_blank">Read More</a>
+            </div>
+          </div>
+
+        </div>
+        <!-- Carousel Nav Buttons -->
+        <div class="carousel-nav-buttons">
+          <button id="prevBtn"><i class="bx bx-chevron-left"></i></button>
+          <button id="nextBtn"><i class="bx bx-chevron-right"></i></button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="section">
+      <div class="section-content">
+        <h2>Funky Reads</h2>
+        <!-- Blog Cards Container -->
+        <div class="blog-cards-container">
+          <div class="blog-card">
+            <h3><i class="bx bx-terminal"></i> Understanding GPU Architecture</h3>
+            <p style="text-wrap: wrap;">
+              Dive deep into the nitty-gritty of GPU architecture and discover
+              what makes them tick!
+            </p>
+            <a
+              href="https://medium.com/@yourprofile/understanding-gpu-architecture"
+              class="read-more"
+              target="_blank"
+              >Read More</a
+            >
+          </div>
+          <div class="blog-card">
+            <h3><i class="bx bx-cog"></i> Optimizing Compilers for Performance</h3>
+            <p style="text-wrap: wrap;">
+              Uncover the secrets to making compilers run faster and smarter.
+            </p>
+            <a
+              href="https://medium.com/@yourprofile/optimizing-compilers-for-performance"
+              class="read-more"
+              target="_blank"
+              >Read More</a
+            >
+          </div>
+          <div class="blog-card">
+            <h3><i class="bx bx-rocket"></i> The Future of Graphics Processing</h3>
+            <p style="text-wrap: wrap;">
+              Explore the upcoming trends that are set to revolutionize GPU
+              technology.
+            </p>
+            <a
+              href="https://medium.com/@yourprofile/the-future-of-graphics-processing"
+              class="read-more"
+              target="_blank"
+              >Read More</a
+            >
+          </div>
+          <!-- Additional blog cards as needed -->
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- Connect Section -->
+    <section id="connect" class="section">
+      <div class="section-content">
+        <div class="left-column">
+          <h2>Let's Chat!</h2>
+          <!-- Social Media Icons on Contact Page -->
+          <div class="contact-social-icons">
+            <a
+              href="https://linkedin.com/in/yourprofile"
+              target="_blank"
+              aria-label="LinkedIn Profile"
+              ><i class="bx bxl-linkedin"></i
+            ></a>
+            <a
+              href="https://github.com/yourprofile"
+              target="_blank"
+              aria-label="GitHub Profile"
+              ><i class="bx bxl-github"></i
+            ></a>
+            <a
+              href="https://Instagram.com/in/yourprofile"
+              target="_blank"
+              aria-label="Instagram Profile"
+              ><i class="bx bxl-Instagram"></i
+            ></a>
+            <a
+              href="https://facebook.com/yourprofile"
+              target="_blank"
+              aria-label="facebook Profile"
+              ><i class="bx bxl-facebook"></i
+            ></a>
+            <a
+              href="https://twitter.com/in/yourprofile"
+              target="_blank"
+              aria-label="twitter Profile"
+              ><i class="bx bxl-twitter"></i
+            ></a>
+            <a
+              href="mailto:your.email@example.com"
+              target="_blank"
+              aria-label="Email"
+              ><i class="bx bx-envelope"></i
+            ></a>
+          </div>
+        </div>
+        <div class="right-column">
+          <p style="text-wrap: wrap;">
+            Got a cool idea, a burning question, or just want to share your
+            favorite programming joke? Drop me a message, and let's create
+            something awesome together!
+            <br />
+            <br />
+          </p>
+          <form
+            action="https://formspree.io/f/your-form-id"
+            method="POST"
+            style="display: flex; flex-direction: column; gap: 15px;"
+          >
+            <input
+              type="text"
+              name="name"
+              placeholder="Your Name"
+              required
+              style="
+                padding: 10px;
+                border: 1px solid #ffffff;
+                border-radius: 4px;
+                background-color: rgba(255, 255, 255, 0.1);
+                color: #ffffff;
+              "
+            />
+            <input
+              type="email"
+              name="_replyto"
+              placeholder="Your Email"
+              required
+              style="
+                padding: 10px;
+                border: 1px solid #ffffff;
+                border-radius: 4px;
+                background-color: rgba(255, 255, 255, 0.1);
+                color: #ffffff;
+              "
+            />
+            <textarea
+              name="message"
+              placeholder="Your Message"
+              rows="5"
+              required
+              style="
+                padding: 10px;
+                border: 1px solid #ffffff;
+                border-radius: 4px;
+                background-color: rgba(255, 255, 255, 0.1);
+                color: #ffffff;
+              "
+            ></textarea>
+            <button
+              type="submit"
+              style="
+                padding: 10px 20px;
+                background-color: #ffffff;
+                color: #000000;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+              "
+            >
+              Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Mouse Scroll Indicator -->
+  <div class="mouse-scroll" aria-label="Scroll Down Indicator">
+    <div class="mouse">
+      <div class="wheel"></div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    // Custom Cursor Movement
+    const cursor = document.getElementById("cursor");
+    document.addEventListener("mousemove", moveCursor);
+
+    function moveCursor(e) {
+      const x = e.clientX;
+      const y = e.clientY;
+      cursor.style.left = `${x}px`;
+      cursor.style.top = `${y}px`;
+    }
+
+    function cursorWhite() {
+      cursor.classList.add("white");
+    }
+    function cursorDefault() {
+      cursor.classList.remove("white");
+    }
+    const interactiveElements = document.querySelectorAll(
+      "a, button, input, textarea, .hamburger"
+    );
+    interactiveElements.forEach((el) => {
+      el.addEventListener("mouseenter", cursorWhite);
+      el.addEventListener("mouseleave", cursorDefault);
+    });
+
+    // Hamburger Menu Toggle
+    const hamburger = document.querySelector(".hamburger");
+    const navMenu = document.querySelector(".navbar-right");
+
+    hamburger.addEventListener("click", () => {
+      navMenu.classList.toggle("active");
+      hamburger.classList.toggle("active");
+      const isActive = navMenu.classList.contains("active");
+      hamburger.setAttribute("aria-expanded", isActive);
+      document.body.style.overflow = isActive ? "hidden" : "auto";
+    });
+
+    // Close the menu when a navigation link is clicked
+    const navLinks = document.querySelectorAll(".nav-menu li a");
+    navLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        navMenu.classList.remove("active");
+        hamburger.classList.remove("active");
+        hamburger.setAttribute("aria-expanded", "false");
+        document.body.style.overflow = "auto";
+      });
+    });
+
+    // Mouse Scroll Indicator (scrolls to home if needed)
+    const mouseScroll = document.querySelector(".mouse-scroll");
+    mouseScroll.addEventListener("click", () => {
+      const nextSection = document.querySelector("#home");
+      nextSection.scrollIntoView({ behavior: "smooth" });
+    });
+
+    // Section Entry Animations Using IntersectionObserver
+    const sections = document.querySelectorAll(".section");
+    const options = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.3,
+    };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+        } else {
+          entry.target.classList.remove("active");
+        }
+      });
+    }, options);
+    sections.forEach((section) => {
+      observer.observe(section);
+    });
+
+    // Preloader Logic
+    document.addEventListener("DOMContentLoaded", function () {
+      const preloader = document.getElementById("preloader");
+      const preloaderText = document.getElementById("preloader-text");
+      const mainContent = document.getElementById("main-content");
+
+      const greetings = [
+        "Hi, this is Ayush!",
+        "नमस्ते, मैं Ayush!",
+        "Hola, soy Ayush!",
+        "Bonjour, je suis Ayush!",
+        "Hallo, ich bin Ayush!",
+        "你好，我是 Ayush!",
+        "こんにちは、Ayushです",
+        "مرحبا، أنا Ayush!",
+        "Привет, это Ayush!",
+        "Olá, eu sou Ayush!",
+        "Ciao, sono Ayush!",
+        "안녕하세요, 저는 Ayush입니다 !",
+      ];
+
+      let currentGreeting = 0;
+      const totalGreetings = greetings.length;
+      const displayDurations = [
+        1000, // for "Hi, this is Ayush!"
+        500,
+        125,
+        125,
+        125,
+        125,
+        125,
+        125,
+        125,
+        125,
+        250,
+        350,
+      ];
+      let greetingTimer;
+
+      const updateGreeting = () => {
+        if (currentGreeting < totalGreetings) {
+          preloaderText.textContent = greetings[currentGreeting];
+          currentGreeting++;
+        } else {
+          clearTimeout(greetingTimer);
+          preloader.classList.add("hidden");
+          mainContent.classList.add("visible");
+          document.body.style.overflow = "auto";
+        }
+      };
+
+      updateGreeting();
+      function dynamicGreetingInterval() {
+        if (currentGreeting < totalGreetings) {
+          greetingTimer = setTimeout(() => {
+            updateGreeting();
+            dynamicGreetingInterval();
+          }, displayDurations[currentGreeting - 1]);
+        } else {
+          clearTimeout(greetingTimer);
+          preloader.classList.add("hidden");
+          mainContent.classList.add("visible");
+          document.body.style.overflow = "auto";
+        }
+      }
+      dynamicGreetingInterval();
+    });
+
+    // ===== Carousel Prev/Next Logic for Projects =====
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const carouselContainer = document.querySelector(".projects-carousel-container");
+
+    // The scroll distance per click (matches card width + gap)
+    const CARD_SCROLL_AMOUNT = 320;
+
+    prevBtn.addEventListener("click", () => {
+      carouselContainer.scrollBy({
+        left: -CARD_SCROLL_AMOUNT,
+        behavior: "smooth",
+      });
+    });
+    nextBtn.addEventListener("click", () => {
+      carouselContainer.scrollBy({
+        left: CARD_SCROLL_AMOUNT,
+        behavior: "smooth",
+      });
+    });
+  </script>
+</body>
+</html>
