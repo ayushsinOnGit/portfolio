@@ -218,7 +218,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.95); /* Slightly transparent */
+      background-color: rgba(0, 0, 0); /* Slightly transparent */
       display: flex;
       justify-content: center;
       align-items: center;
@@ -230,6 +230,7 @@
       visibility: hidden;
       pointer-events: none;
     }
+
     .preloader-content {
       display: flex;
       align-items: center;
@@ -365,9 +366,11 @@
     }
     @keyframes swipeUp {
       from {
+        opacity: 0;
         transform: translateY(20px);
       }
       to {
+        opacity: 1;
         transform: translateY(0);
       }
     }
