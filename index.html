@@ -218,13 +218,13 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0); /* Slightly transparent */
+      background-color: rgba(0, 0, 0);
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
       z-index: 1000;
-      transition: opacity 1s ease, visibility 1s;
+      transition: opacity 0.1s ease, visibility 0.1s;
     }
     #preloader.hidden {
       visibility: hidden;
@@ -240,7 +240,7 @@
     #preloader-text {
       font-size: 2rem;
       margin-left: 1rem;
-      animation: swipeUp 0.01s forwards ease-in-out;
+      animation: swipeUp 0.01s forwards;
       display: flex;
       align-items: center;
       color: #ffffff;
