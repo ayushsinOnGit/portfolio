@@ -53,12 +53,13 @@
     /* ============================= */
     .projects-carousel-container {
       position: relative;
+      padding-left: 15px;
       width: 100%;
       overflow-x: scroll; /* Enable horizontal scrolling */
       white-space: nowrap; /* Keep cards side by side */
       scroll-snap-type: x mandatory; 
       scrollbar-width: thin;
-      scrollbar-color: rgba(255, 255, 255, 0.5) transparent;
+      scrollbar-color: rgba(255, 255, 255, 0.0) transparent;
     }
 
     .project-card p {
@@ -70,15 +71,19 @@
 
 .project-card h3 {
   margin-bottom: 10px;
+    /* Ensures text wraps normally within the card */
+    white-space: normal;
+  word-wrap: break-word; /* older support */
+  overflow-wrap: break-word; /* modern approach */
 }
     .projects-carousel-container::-webkit-scrollbar {
       height: 8px;
     }
     .projects-carousel-container::-webkit-scrollbar-track {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.0);
     }
     .projects-carousel-container::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.0);
       border-radius: 4px;
     }
 
@@ -333,6 +338,17 @@
       line-height: 1.6;
       color: #cccccc;
     }
+
+    @media (min-width: 1024px) {
+  .section-content .left-column {
+    flex: 0 0 25%; /* Shrink the left column to 25% of the parent container */
+    max-width: 25%; /* Ensure it doesn't exceed 25% */
+  }
+  .section-content .right-column {
+    flex: 0 0 75%; /* Make the right column take the remaining 75% */
+    max-width: 75%;
+  }
+}
 
     .social-icons-bottom {
       margin-top: 20px;
@@ -1067,150 +1083,104 @@
     <!-- Projects Section with Carousel -->
     <section id="projects" class="section">
       <div class="section-content">
-        <h2>Projects</h2>
-
-        <!-- Wrap your existing "cards" in the carousel container -->
+        <div>
+          <h2>Projects</h2>
+      
+        </div>
+        <!-- Carousel Container -->
         <div class="projects-carousel-container">
           <div class="projects-carousel">
-
-            <!-- (Keeping your existing markup for each project card) -->
+            
+            <!-- Accelerator Compiler -->
             <div class="project-card">
-              <h3><i class="bx bx-terminal"></i> Compiler Optimizer</h3>
-              <img
-                src="https://via.placeholder.com/300x200/444/fff?text=Compiler+Optimizer"
-                alt="Compiler Optimizer"
-              />
+              <h3><i class="bx bx-rocket"></i> AI Accelerator Compiler</h3>
+              <img src="gpu.png" alt="Accelerator Compiler" />
               <p>
-                A tool that makes your code run faster than a caffeinated
-                squirrel on a wheel. Because who doesn't love speed?
+                Turbocharges AI models like a rocket strapped to your neural net. Speed and precision? Check.
+              </p>
+              <div class="project-tools">
+                <span>LLVM</span>
+                <span>MLIR</span>
+              </div>
+            </div>
+
+            <!-- Raspberry Pi Simulator -->
+            <div class="project-card">
+              <h3><i class="bx bx-brain"></i> AI Accelerator Simulator</h3>
+              <img src="rasp.png" alt="AI Accelerator Simulator" />
+              <p>
+                A virtual AI accelerator built for CI/CD testing. Simulate, debug, and deploy without waiting for hardware—because speed is everything!
+              </p>
+              <div class="project-tools">
+                <i class="bx bxl-python" title="Python"></i>
+                <i class="bx bx-terminal" title="Bash"></i>
+                <i class="bx bx-cog" title="Docker"></i>
+              </div>
+            </div>
+    
+            <!-- RC Car Project -->
+            <div class="project-card">
+              <h3><i class="bx bx-car"></i> Toy Compiler - x86</h3>
+              <img src="cpu.png" alt="RC Car Project" />
+              <p>
+                Built a toy compiler for x86 CPU! It’s small, fast, and occasionally acts like it has a mind of its own.
               </p>
               <div class="project-tools">
                 <i class="bx bx-code" title="C++"></i>
-                <i class="bx bx-python" title="Python"></i>
-                <i class="bx bx-terminal" title="Bash"></i>
+                <i class="bx bxl-python" title="Python"></i>
               </div>
-              <a href="#" class="read-more" target="_blank">Read More</a>
             </div>
 
+            <!-- Panorama Image Stitching -->
             <div class="project-card">
-              <h3><i class="bx bx-terminal"></i> Compiler Optimizer</h3>
-              <img
-                src="https://via.placeholder.com/300x200/444/fff?text=Compiler+Optimizer"
-                alt="Compiler Optimizer"
-              />
+              <h3><i class="bx bx-landscape"></i> Panorama - Image Stitching</h3>
+              <img src="stitch.png" alt="Panorama Stitching" />
               <p>
-                A tool that makes your code run faster than a caffeinated
-                squirrel on a wheel. Because who doesn't love speed?
+                Transform scattered snapshots into breathtaking panoramas. Code meets creativity, no tripod required!
               </p>
               <div class="project-tools">
                 <i class="bx bx-code" title="C++"></i>
-                <i class="bx bx-python" title="Python"></i>
-                <i class="bx bx-terminal" title="Bash"></i>
+                <i class="bx bxl-python" title="Python"></i>
               </div>
-              <a href="#" class="read-more" target="_blank">Read More</a>
             </div>
+    
 
+            <!-- Steganography -->
             <div class="project-card">
-              <h3><i class="bx bx-terminal"></i> Compiler Optimizer</h3>
-              <img
-                src="https://via.placeholder.com/300x200/444/fff?text=Compiler+Optimizer"
-                alt="Compiler Optimizer"
-              />
+              <h3><i class="bx bx-lock"></i> Steganography</h3>
+              <img src="steg.png" alt="Steganography Project" />
               <p>
-                A tool that makes your code run faster than a caffeinated
-                squirrel on a wheel. Because who doesn't love speed?
+                Hiding secrets in plain sight. Call me the James Bond of digital media!
               </p>
               <div class="project-tools">
                 <i class="bx bx-code" title="C++"></i>
-                <i class="bx bx-python" title="Python"></i>
-                <i class="bx bx-terminal" title="Bash"></i>
+                <i class="bx bxl-python" title="Python"></i>
               </div>
-              <a href="#" class="read-more" target="_blank">Read More</a>
             </div>
 
+            <!-- Custom Drone -->
             <div class="project-card">
-              <h3><i class="bx bx-terminal"></i> Compiler Optimizer</h3>
-              <img
-                src="https://via.placeholder.com/300x200/444/fff?text=Compiler+Optimizer"
-                alt="Compiler Optimizer"
-              />
+              <h3><i class="bx bxs-plane-alt"></i> Custom Drone</h3>
+              <img src="drone.png" alt="Custom Drone" />
               <p>
-                A tool that makes your code run faster than a caffeinated
-                squirrel on a wheel. Because who doesn't love speed?
+                A DIY drone that doesn’t just fly—it glides with flair. My takeoff game is strong, just like my landing attempts.
               </p>
               <div class="project-tools">
-                <i class="bx bx-code" title="C++"></i>
-                <i class="bx bx-python" title="Python"></i>
-                <i class="bx bx-terminal" title="Bash"></i>
+                <i class="bx bx-chip" title="C++"></i>
+                <i class="bx bxl-python" title="Python"></i>
               </div>
-              <a href="#" class="read-more" target="_blank">Read More</a>
             </div>
-
-            <div class="project-card">
-              <h3><i class="bx bx-terminal"></i> Compiler Optimizer</h3>
-              <img
-                src="https://via.placeholder.com/300x200/444/fff?text=Compiler+Optimizer"
-                alt="Compiler Optimizer"
-              />
-              <p>
-                A tool that makes your code run faster than a caffeinated
-                squirrel on a wheel. Because who doesn't love speed?
-              </p>
-              <div class="project-tools">
-                <i class="bx bx-code" title="C++"></i>
-                <i class="bx bx-python" title="Python"></i>
-                <i class="bx bx-terminal" title="Bash"></i>
-              </div>
-              <a href="#" class="read-more" target="_blank">Read More</a>
-            </div>
-
-            <div class="project-card">
-              <h3><i class="bx bx-terminal"></i> Compiler Optimizer</h3>
-              <img
-                src="https://via.placeholder.com/300x200/444/fff?text=Compiler+Optimizer"
-                alt="Compiler Optimizer"
-              />
-              <p>
-                A tool that makes your code run faster than a caffeinated
-                squirrel on a wheel. Because who doesn't love speed?
-              </p>
-              <div class="project-tools">
-                <i class="bx bx-code" title="C++"></i>
-                <i class="bx bx-python" title="Python"></i>
-                <i class="bx bx-terminal" title="Bash"></i>
-              </div>
-              <a href="#" class="read-more" target="_blank">Read More</a>
-            </div>
-
-            <div class="project-card">
-              <h3><i class="bx bx-terminal"></i> Compiler Optimizer</h3>
-              <img
-                src="https://via.placeholder.com/300x200/444/fff?text=Compiler+Optimizer"
-                alt="Compiler Optimizer"
-              />
-              <p>
-                A tool that makes your code run faster than a caffeinated
-                squirrel on a wheel. Because who doesn't love speed?
-              </p>
-              <div class="project-tools">
-                <i class="bx bx-code" title="C++"></i>
-                <i class="bx bx-python" title="Python"></i>
-                <i class="bx bx-terminal" title="Bash"></i>
-              </div>
-              <a href="#" class="read-more" target="_blank">Read More</a>
-            </div>
+    
           </div>
-
         </div>
-        <!-- Carousel Nav Buttons -->
+    
+        <!-- Carousel Navigation Buttons -->
         <div class="carousel-nav-buttons">
           <button id="prevBtn"><i class="bx bx-chevron-left"></i></button>
           <button id="nextBtn"><i class="bx bx-chevron-right"></i></button>
         </div>
-
       </div>
     </section>
-
     <!-- Blog Section -->
     <section id="blog" class="section">
       <div class="section-content">
