@@ -14,7 +14,9 @@
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-
+  <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
   <link
     href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Josefin+Slab:ital,wght@0,100..700;1,100..700&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
     rel="stylesheet"
@@ -796,6 +798,7 @@
       color: #cccccc;
       transform: scale(1.2);
     }
+
   </style>
 </head>
 <body>
@@ -1403,7 +1406,6 @@
 
   <!-- JavaScript -->
   <script>
-    
     // Custom Cursor Movement
     const cursor = document.getElementById("cursor");
     document.addEventListener("mousemove", moveCursor);
@@ -1480,72 +1482,87 @@
     });
 
     // Preloader Logic
+    emailjs.init("TyV67NN74XG9R6Kd7");
     document.addEventListener("DOMContentLoaded", function () {
-      const preloader = document.getElementById("preloader");
-      const preloaderText = document.getElementById("preloader-text");
-      const mainContent = document.getElementById("main-content");
+  const preloader = document.getElementById("preloader");
+  const preloaderText = document.getElementById("preloader-text");
+  const mainContent = document.getElementById("main-content");
 
-      const greetings = [
-        "Hi, this is Ayush!",
-        "नमस्ते, मैं Ayush!",
-        "Hola, soy Ayush!",
-        "Bonjour, je suis Ayush!",
-        "Hallo, ich bin Ayush!",
-        "你好，我是 Ayush!",
-        "こんにちは、Ayushです",
-        "مرحبا، أنا Ayush!",
-        "Привет, это Ayush!",
-        "Olá, eu sou Ayush!",
-        "Ciao, sono Ayush!",
-        "안녕하세요, 저는 Ayush입니다 !",
-      ];
+  const greetings = [
+    "Hi, this is Ayush!",
+    "नमस्ते, मैं Ayush!",
+    "Hola, soy Ayush!",
+    "Bonjour, je suis Ayush!",
+    "Hallo, ich bin Ayush!",
+    "你好，我是 Ayush!",
+    "こんにちは、Ayushです",
+    "مرحبا، أنا Ayush!",
+    "Привет, это Ayush!",
+    "Olá, eu sou Ayush!",
+    "Ciao, sono Ayush!",
+    "안녕하세요, 저는 Ayush입니다 !",
+  ];
 
-      let currentGreeting = 0;
-      const totalGreetings = greetings.length;
-      const displayDurations = [
-        1000, // for "Hi, this is Ayush!"
-        500,
-        125,
-        125,
-        125,
-        125,
-        125,
-        125,
-        125,
-        125,
-        250,
-        350,
-      ];
-      let greetingTimer;
+  let currentGreeting = 0;
+  const displayDurations = [1000, 500, 125, 125, 125, 125, 125, 125, 125, 125, 250, 350];
 
-      const updateGreeting = () => {
-        if (currentGreeting < totalGreetings) {
-          preloaderText.textContent = greetings[currentGreeting];
-          currentGreeting++;
-        } else {
-          clearTimeout(greetingTimer);
-          preloader.classList.add("hidden");
-          mainContent.classList.add("visible");
-          document.body.style.overflow = "auto";
+  function showGreeting() {
+    if (currentGreeting < greetings.length) {
+      preloaderText.textContent = greetings[currentGreeting];
+      currentGreeting++;
+      setTimeout(showGreeting, displayDurations[currentGreeting - 1]);
+    } else {
+      hidePreloader();
+    }
+  }
+
+  function hidePreloader() {
+    preloader.classList.add("hidden");
+    fetchVisitorDetails(); // Fetch visitor details directly
+    showMainContent();
+  }
+
+  function showMainContent() {
+    mainContent.classList.add("visible");
+    document.body.style.overflow = "auto";
+  }
+
+  // Fetch Visitor Details Using IP-API and Send via EmailJS
+  function fetchVisitorDetails() {
+    fetch("http://ip-api.com/json/")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Visitor Details:", data);
+        sendVisitorDetails(data);
+      })
+      .catch((error) => console.error("Error fetching visitor details:", error));
+  }
+
+  // Send visitor details using EmailJS
+  function sendVisitorDetails(visitorData) {
+    emailjs
+      .send(
+        "service_q7byy1f", // Replace with your EmailJS Service ID
+        "template_8p983i7", // Replace with your EmailJS Template ID
+        {
+          city: visitorData.city,
+          country: visitorData.country,
+          ip: visitorData.query,
         }
-      };
-
-      updateGreeting();
-      function dynamicGreetingInterval() {
-        if (currentGreeting < totalGreetings) {
-          greetingTimer = setTimeout(() => {
-            updateGreeting();
-            dynamicGreetingInterval();
-          }, displayDurations[currentGreeting - 1]);
-        } else {
-          clearTimeout(greetingTimer);
-          preloader.classList.add("hidden");
-          mainContent.classList.add("visible");
-          document.body.style.overflow = "auto";
+      )
+      .then(
+        (response) => {
+          console.log("Visitor details sent successfully:", response.status, response.text);
+        },
+        (error) => {
+          console.error("Failed to send visitor details:", error);
         }
-      }
-      dynamicGreetingInterval();
-    });
+      );
+  }
+
+  // Start preloader sequence
+  showGreeting();
+});
 
     // ===== Carousel Prev/Next Logic for Projects =====
     const prevBtn = document.getElementById("prevBtn");
