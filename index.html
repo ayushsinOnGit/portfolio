@@ -687,7 +687,8 @@
     /* ============================= */
     /*   Timeline Section Redesign   */
     /* ============================= */
-    .timeline-container {
+
+.timeline-container {
   display: flex;
   justify-content: space-between;
   gap: 20px;
@@ -709,11 +710,15 @@
   border-radius: 8px;
   position: relative;
   border-left: 4px solid #ffffff;
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: transform 0.1s, box-shadow 0.1s, background-color 0.1s;
+  color: white;
+  transform-origin: center; /* Ensures it grows evenly */
 }
 
 .timeline-event:hover {
-  transform: translateY(-5px);
+  transform: scale(1.05); /* Slightly grows in size */
+  background-color: rgba(255, 255, 255, 0.9);
+  color: black;
   box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
 }
 
@@ -725,19 +730,27 @@
 }
 
 .timeline-event p {
-  font-size: 0.5rem;
+  font-size: 0.7rem;
   line-height: 1.5;
+  color: inherit; /* Ensures it matches parent color */
+  visibility: hidden;
+  height: 0;
 }
+
+.timeline-event:hover p {
+  font-size: 0.7rem;
+  line-height: 1.5;
+  color: inherit; /* Ensures it matches parent color */
+  visibility: visible;
+  height: auto;
+}
+
 
 .timeline-event a {
   text-decoration: none;
-  color: #cccccc;
   transition: color 0.3s;
 }
 
-.timeline-event a:hover {
-  color: #ffffff;
-}
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
@@ -1390,6 +1403,7 @@
 
   <!-- JavaScript -->
   <script>
+    
     // Custom Cursor Movement
     const cursor = document.getElementById("cursor");
     document.addEventListener("mousemove", moveCursor);
