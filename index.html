@@ -688,35 +688,66 @@
     /*   Timeline Section Redesign   */
     /* ============================= */
     .timeline-container {
-      position: relative;
-      max-width: 800px;
-      width: 100%;
-      margin: 0 auto;
-      padding: 20px 0;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      animation: fadeIn 1s ease forwards;
-    }
-    .timeline-event {
-      background-color: rgba(255, 255, 255, 0.05);
-      color: #ffffff;
-      padding: 20px;
-      border-left: 4px solid #ffffff;
-      border-radius: 4px;
-      position: relative;
-      transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 0.6s forwards;
-      overflow: hidden; /* Prevents content from causing overflow */
-    }
-    .timeline-event:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
-      background-color: rgba(255, 255, 255, 0.1);
-    }
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px;
+}
 
+.timeline-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.timeline-event {
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 10px;
+  border-radius: 8px;
+  position: relative;
+  border-left: 4px solid #ffffff;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.timeline-event:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
+}
+
+.timeline-event h3 {
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.timeline-event p {
+  font-size: 0.5rem;
+  line-height: 1.5;
+}
+
+.timeline-event a {
+  text-decoration: none;
+  color: #cccccc;
+  transition: color 0.3s;
+}
+
+.timeline-event a:hover {
+  color: #ffffff;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .timeline-container {
+    flex-direction: column;
+  }
+  .timeline-column {
+    width: 100%;
+  }
+}
     /* Contact Page Social Media Icons */
     .contact-social-icons {
       margin-top: 20px;
@@ -904,73 +935,137 @@
     </section>
 
     <!-- Timeline Section Redesign with Minimalist Boxicons -->
-<section id="timeline" class="section">
-    <div class="section-content">
-      <div class="left-column">
-        <h2>My Journey</h2>
-      </div>
-      <div class="right-column">
+    <section id="timeline" class="section">
+      <div class="section-content">
+        <div>
+          <h2>My Journey</h2>
+          <p>Take a scroll through my epic saga of coffee-fueled academia and industry adventures!</p>
+        </div>
         <div class="timeline-container">
-  
-          <div class="timeline-event">
-            <h3>
-              2015 - First Hello World 
-              <i class="bx bx-code-alt" style="margin-left:8px;"></i>
-            </h3>
-            <p style="text-wrap: wrap;">
-              Typed "Hello, World!" for the first time and realized I could
-              control a computer. The journey of a thousand lines of code begins!
-            </p>
+          <!-- Left Column -->
+          <div class="timeline-column">
+            <div class="timeline-event">
+              <h3><i class="bx bx-trophy"></i> 2014 - Won COFAS</h3>
+              <p>Bagged the trophy at COFAS 2014, an international computer olympiad.
+              <a href="https://avenuemail.in/hill-top-school-conquers-international-computer-olympiad-lucknow/" style="color: #ccc;">Read more</a></p>
+            </div>
+            <div class="timeline-event">
+              <h3><i class="bx bx-book"></i> 2015 - Secondary School Triumph</h3>
+              <p>
+                Graduated with 94% under ICSE, thriving on math, physics, and computer science.  
+                Honored with the "Computer Wizard" award by my batch—proof that code and creativity can coexist!
+              </p>
+            </div>
+            <div class="timeline-event">
+              <h3>
+                <i class="bx bx-trophy" style="margin-left:8px;"></i>
+                2015 & 2016 - Won Quantum (Twice!)
+              </h3>
+              <p style="text-wrap: wrap;">
+                Two years of back-to-back wins and enough bragging rights to last a lifetime (or at least through college applications).
+              </p>
+            </div>
+            <div class="timeline-event">
+              <h3><i class="bx bx-medal"></i> 2017 - Academic Milestones</h3>
+              <p>
+                Achieved 92% in ISC Higher Secondary and cracked WBJEE with AIR 3689 out of 0.15 million students.  
+                Jadavpur University, here I come!
+              </p>
+            </div>
+            <div class="timeline-event">
+              <h3><i class="bx bx-trophy"></i> 2018 - Winner of Hult Prize</h3>
+              <p>Proposed a sustainable model tackling unemployment.
+              <a href="https://www.facebook.com/HultPrizeJU/photos/a.1670497773021745/2309789869092529/?type=3" style="color: #ccc;">Read more</a></p>
+            </div>
           </div>
-  
-          <div class="timeline-event">
-            <h3>
-              2017 - Bachelor’s Degree 
-              <i class="bx bx-graduation" style="margin-left:8px;"></i>
-            </h3>
-            <p style="text-wrap: wrap;">
-              Graduated with a degree in Computer Engineering. Learned that coffee
-              is a necessary part of programming.
-            </p>
+    
+          <!-- Middle Column -->
+          <div class="timeline-column">
+            <div class="timeline-event">
+              <h3><i class="bx bx-award"></i> 2018 - 2021: Leadership Highlights</h3>
+              <p>
+                <i class="bx bx-rocket"></i> Directed Jadavpur's Tech, Cultural and Management fest, managing $24,000+ and 70+ volunteers.<br>
+                <i class="bx bx-network-chart"></i> Tech Lead for <b>Hult Prize</b>, <b>Falling Walls Lab</b>, <b>TEDx Jadavpur</b>, <b>Josh Talks</b>, and <b>JU MUN</b> handling AV setups and marketing.<br>
+              </p>
+            </div>
+          
+            <div class="timeline-event">
+              <h3><i class="bx bx-group"></i> 2017 - 2021: Clubs & Societies</h3>
+              <p>
+                <i class="bx bx-briefcase"></i> Member of <b>Placement, Incubation & Entrepreneurship Cells</b><br>
+                <i class="bx bx-bot"></i> Core member of <b>Robotics Club</b> & <b>Code Club</b><br>
+                <i class="bx bx-cog"></i> Organized workshops, hackathons, mentored peers and fostered collaboration.
+              </p>
+            </div>
+          
+            <div class="timeline-event">
+              <h3><i class="bx bx-code"></i> 2020 - Academic Research Projects</h3>
+              <p>
+                <i class="bx bx-image"></i> <b>Panorama Magic:</b> Advanced image stitching.<br>
+                <i class="bx bx-lock"></i> <b>Steganography:</b> Enhanced multimedia security.
+              </p>
+            </div>
+            <div class="timeline-event">
+              <h3><i class="bx bx-chalkboard"></i> 2020 - Final Year Seminar</h3>
+              <p>
+                Unveiled the magic behind Adobe Photoshop’s blending modes and filters—because who doesn’t love turning math into art?
+              </p>
+            </div>
+            <div class="timeline-event">
+              <h3><i class="bx bx-award"></i> 2021 - Graduation</h3>
+              <p>Earned First Class Honors in Bachelor’s from JU and embarked on an exciting journey into the tech industry. Cheers to sleepless nights and endless coding!</p>
+            </div>
           </div>
-  
-          <div class="timeline-event">
-            <h3>
-              2018 - Internship at XYZ Tech
-              <i class="bx bx-briefcase" style="margin-left:8px;"></i>
-            </h3>
-            <p style="text-wrap: wrap;">
-              Interned at XYZ Tech where I optimized code so well that the
-              computer thanked me... or so I liked to think.
-            </p>
+          
+          
+          <!-- Right Column -->
+          <div class="timeline-column">
+            <div class="timeline-column">
+              <!-- Card 1 -->
+              <div class="timeline-event">
+                <h3><i class="bx bx-chip"></i> 2021 Senior AI Compiler Engineer at AlphaICs</h3>
+                <p>
+                  Led innovations in AI compilers, enhancing efficiency for deep learning models on proprietary hardware.
+                </p>
+              </div>
+              
+              <!-- Card 2 -->
+              <div class="timeline-event">
+                <h3><i class="bx bx-trophy"></i> 2022 Employee of the Month - AlphaICs</h3>
+                <p>
+                  Recognized as Employee of the Month for impactful compiler advancements and teamwork.
+                </p>
+              </div>
+            
+              <!-- Card 3 -->
+              <!-- Card 5 -->
+              <div class="timeline-event">
+                <h3><i class="bx bx-chip"></i> 2023 SDE-II at AMD</h3>
+                <p>
+                  Optimizing Gen AI and CNN performance on cutting-edge hardware while enhancing compiler functionalities.
+                </p>
+              </div>
+
+              <!-- Card 4 -->
+              <div class="timeline-event">
+                <h3><i class="bx bx-trophy"></i> 2024 Spotlight Award - AMD</h3>
+                <p>
+                  Honored with the prestigious Spotlight Award for exceptional contributions to compiler optimizations and tool development.
+                </p>
+              </div>
+
+              <div class="timeline-event">
+                <h3><i class="bx bx-time"></i> 2023 - Present</h3>
+                <p>
+                  Living the dream at AMD, crafting smarter compilers and optimizing GPUs—turning code into high-speed magic every day!
+                </p>
+              </div>
+            
+            </div>
           </div>
-  
-          <div class="timeline-event">
-            <h3>
-              2020 - Joined AMD 
-              <i class="bx bx-rocket" style="margin-left:8px;"></i>
-            </h3>
-            <p style="text-wrap: wrap;">
-              Became a Compiler Developer at AMD. Now I make GPUs faster while
-              dreaming of parallel universes.
-            </p>
-          </div>
-  
-          <div class="timeline-event">
-            <h3>
-              2023 - Published Research 
-              <i class="bx bx-book-content" style="margin-left:8px;"></i>
-            </h3>
-            <p style="text-wrap: wrap;">
-              Published a paper on compiler optimization. Finally felt like a
-              real academic... until I got back to debugging.
-            </p>
-          </div>
-  
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
     <!-- Projects Section with Carousel -->
     <section id="projects" class="section">
